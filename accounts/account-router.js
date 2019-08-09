@@ -21,4 +21,39 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const account = await db("accounts").where("id", id);
+    if (account[0] === undefined) {
+      res.status(404).json({
+        success: false,
+        message: `Account not found.`
+      });
+    } else res.status(200).json(account);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error
+    });
+  }
+});
+
+router.post("/", async (req, res) => {
+  const data = req.body;
+  try {
+    const newAccount = await db("accounts").insert(data);
+    res.status(201).json({
+      success: true,
+      newAccount,
+      data
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error
+    });
+  }
+});
+
 module.exports = router;
