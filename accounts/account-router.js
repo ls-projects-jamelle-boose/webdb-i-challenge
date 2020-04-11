@@ -1,7 +1,6 @@
 const express = require('express');
 const db = require('../data/dbConfig');
 const router = express.Router();
-<<<<<<< HEAD
 
 router.get('/', async (req, res) => {
   const { limit, orderby, sortdir } = req.query;
@@ -9,35 +8,6 @@ router.get('/', async (req, res) => {
   const queryOrderBy = orderby || 'id';
   const querySortDir = sortdir || 'asc';
 
-=======
-
-// TODO[1] Add limit clause to root GET endpoint
-/* 
-
-Add a `query string` option to your `GET /api/accounts` endpoint. The `query string` may contain `limit`, `sortby` and `sortdir` keys. If these keys are provided, use these values to limit and sort the `accounts` which are selected from the database. Reference the docs for sorting and limiting in `knex`.
-
-sample req.query object
-{
-  limit: 5,
-  sortby: 'id',
-  sortdir: 'desc'
-}
-
-limit — .limit(value)
-Adds a limit clause to the query.
-
-knex.select('*').from('users').limit(10).offset(30)
-Outputs:
-select * from `users` limit 10 offset 30
-
-*/
-router.get('/', async (req, res) => {
-  const { limit, orderby, sortdir } = req.query;
-  const queryLimit = limit || -1;
-  const queryOrderBy = orderby || 'id';
-  const querySortDir = sortdir || 'asc';
-
->>>>>>> 170bb4034c43f4cb6dbd772fcd19acc5ced1b5c3
   try {
     const accounts = await db('accounts')
       .orderBy(queryOrderBy, querySortDir)
