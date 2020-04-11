@@ -62,3 +62,8 @@ typings/
 
 # vscode
 .vscode
+
+# request
+.request
+.request.http
+.request.rest
